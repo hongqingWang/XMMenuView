@@ -26,6 +26,7 @@
     if (cell == nil) {
         cell = [[XMMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

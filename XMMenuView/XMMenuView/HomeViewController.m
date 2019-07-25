@@ -24,6 +24,34 @@
     
     [self setupUI];
     
+    NSArray *array = @[
+                       @{
+                           @"count":@"第一次",
+                           @"time":@"2019-01-01 01:01:00",
+                           @"status":@"已失败"
+                           },
+                       @{
+                           @"count":@"第二次",
+                           @"time":@"2019-02-02 02:02:00",
+                           @"status":@"已成功"
+                           },
+                       @{
+                           @"count":@"第三次",
+                           @"time":@"2019-03-03 03:03:00",
+                           @"status":@"等待管理审核"
+                           },
+                       @{
+                           @"count":@"第四次",
+                           @"time":@"2019-04-04 04:04:00",
+                           @"status":@"已失败"
+                           },
+                       @{
+                           @"count":@"第五次",
+                           @"time":@"2019-05-05 05:05:00",
+                           @"status":@"已成功"
+                           },
+                       ];
+    NSLog(@"%@", array);
     UIImage *image = [UIImage imageNamed:@"ic_filter_category_0"];
     XMMenuAction *action = [XMMenuAction actionWithTitle:@"首页" image:image handler:^(XMMenuAction *action) {
         NSLog(@"点击了%@",action.title);
@@ -40,7 +68,6 @@
     XMMenuAction *action4 = [XMMenuAction actionWithTitle:@"新闻页" image:image handler:^(XMMenuAction *action) {
         NSLog(@"点击了%@",action.title);
     }];
-    
     self.arr = @[action,action1,action2,action3,action4,action,action1,action2];
 }
 
@@ -49,16 +76,7 @@
     
     self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [self.view addSubview:self.tableView];
-    
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-//    [button setTitle:@"查看" forState:UIControlStateNormal];
-//    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//    button.titleLabel.font = [UIFont systemFontOfSize:12];
-//    button.frame = CGRectMake(233, 164, 43, 21);
-//    [self.view addSubview:button];
-//    [button addTarget:self action:@selector(didClickButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - UITableViewDataSource
@@ -87,7 +105,7 @@
 - (void)didClickButton:(UIButton *)button {
     
     XMMenuView *view = [XMMenuView menuWithActions:self.arr width:[UIScreen mainScreen].bounds.size.width - 60 relyonView:button];
-    view.maxDisplayCount = 8;
+//    view.maxDisplayCount = 3;
     
     [view show];
 }

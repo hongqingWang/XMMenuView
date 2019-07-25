@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XMMenuView : UIView
 //默认倒角   default = 5.0
 @property (nonatomic,assign) CGFloat                        cornerRaius;
-//设置分割线颜色 default = 灰色
-@property (nonatomic,strong) UIColor                       *separatorColor;
 //设置菜单颜色  default = 白色（也可以通过BackgroundColor设置）
 @property (nonatomic,strong) UIColor                       *menuColor;
 //设置菜单单元格高度  default = 44
@@ -34,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)  CGFloat                       offset;
 
 // 从关联点创建
-+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point;
+//+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point;
 // 从关联视图创建（可以是UIView和UIBarButtonItem）
 + (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view;
 - (void)show;

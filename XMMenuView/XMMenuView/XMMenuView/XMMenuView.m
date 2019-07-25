@@ -162,27 +162,11 @@
 #pragma mark - XMMenuView - implementation
 @implementation XMMenuView
 
-+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point{
-    NSAssert(width>0.0f, @"width要大于0");
-    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:width atPoint:point];
-    return menu;
-}
 + (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
     NSAssert(width>0.0f, @"width要大于0");
     NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
     XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:width relyonView:view];
     return menu;
-}
-
-- (instancetype)initWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point{
-    if (self = [super init]) {
-        _actions = [actions copy];
-        _refPoint = point;
-        _menuWidth = width;
-        [self defaultConfiguration];
-        [self setupSubView];
-    }
-    return self;
 }
 
 - (instancetype)initWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
@@ -207,7 +191,6 @@
     [self setDefaultShadow];
     
     _cornerRaius = 5.0f;
-    _separatorColor = [UIColor blackColor];
     _menuColor = [UIColor blackColor];
     _menuCellHeight = 44.0f;
     _maxDisplayCount = 5;
@@ -435,7 +418,7 @@
 - (UIView *)bgView{
     if (!_bgView) {
         _bgView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+//        _bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
         _bgView.alpha = 0.0f;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
         [_bgView addGestureRecognizer:tap];
