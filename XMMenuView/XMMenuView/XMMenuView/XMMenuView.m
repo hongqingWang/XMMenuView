@@ -114,85 +114,6 @@
 }
 @end
 
-#pragma mark - XMMenuCell
-@interface XMMenuCell : UITableViewCell
-
-@end
-
-@interface XMMenuCell ()
-
-@property (nonatomic, strong) UILabel *leftLabel;
-@property (nonatomic, strong) UILabel *middleLabel;
-@property (nonatomic, strong) UILabel *rightLabel;
-
-@end
-
-@implementation XMMenuCell
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self setupUI];
-    }
-    return self;
-}
-
-#pragma mark - setupUI
-- (void)setupUI {
-    
-    [self.contentView addSubview:self.leftLabel];
-    [self.contentView addSubview:self.middleLabel];
-    [self.contentView addSubview:self.rightLabel];
-    
-    [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView);
-        make.centerX.equalTo(self.contentView.mas_centerX).multipliedBy(0.35);
-    }];
-    [self.middleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.contentView);
-        make.width.mas_equalTo(72);
-    }];
-    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView);
-        make.centerX.equalTo(self.contentView.mas_centerX).multipliedBy(1.65);
-    }];
-}
-
-#pragma mark - Getters and Setters
-- (UILabel *)leftLabel {
-    if (_leftLabel == nil) {
-        _leftLabel = [[UILabel alloc] init];
-        _leftLabel.text = @"第一次";
-        _leftLabel.textColor = [UIColor whiteColor];
-        _leftLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _leftLabel;
-}
-
-- (UILabel *)middleLabel {
-    if (_middleLabel == nil) {
-        _middleLabel = [[UILabel alloc] init];
-        _middleLabel.text = @"2019-07-07 09:09:00";
-        _middleLabel.textColor = [UIColor whiteColor];
-        _middleLabel.font = [UIFont systemFontOfSize:12];
-        _middleLabel.numberOfLines = 0;
-        _middleLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _middleLabel;
-}
-
-- (UILabel *)rightLabel {
-    if (_rightLabel == nil) {
-        _rightLabel = [[UILabel alloc] init];
-        _rightLabel.text = @"等待管理审核";
-        _rightLabel.textColor = [UIColor whiteColor];
-        _rightLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _rightLabel;
-}
-
-@end
-
-
 @interface XMMenuAction()
 
 @property (nonatomic) NSString      *title;
@@ -216,9 +137,10 @@
 }
 @end
 
-#import "XMMenuTableHeaderView.h"
-
 #pragma mark - XMMenuView - interface
+#import "XMMenuTableHeaderView.h"
+#import "XMMenuCell.h"
+
 @interface XMMenuView()<UITableViewDelegate, UITableViewDataSource>
 {
     CGPoint          _refPoint;
@@ -236,8 +158,6 @@
 @property(nonatomic,strong)UIView                   *bgView;
 
 @end
-
-static NSString *const menuCellID = @"XMMenuCell";
 
 #pragma mark - XMMenuView - implementation
 @implementation XMMenuView
@@ -467,7 +387,8 @@ static NSString *const menuCellID = @"XMMenuCell";
     return _actions.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    XMMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellID forIndexPath:indexPath];
+    
+    XMMenuCell *cell = [XMMenuCell menuCellWithTableView:tableView];
     XMMenuAction *action = _actions[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = _textFont;
@@ -508,8 +429,6 @@ static NSString *const menuCellID = @"XMMenuCell";
         _tableView.rowHeight = _menuCellHeight;
         _tableView.tableFooterView = [UIView new];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[XMMenuCell class] forCellReuseIdentifier:menuCellID];
-//        _tableView.backgroundColor = [UIColor blackColor];
     }
     return _tableView;
 }

@@ -54,7 +54,8 @@
         make.centerX.equalTo(self.myBackgroundView.mas_centerX).multipliedBy(0.35);
     }];
     [self.middleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.myBackgroundView);
+        make.centerY.equalTo(self.myBackgroundView);
+        make.centerX.equalTo(self.myBackgroundView.mas_centerX).multipliedBy(0.97);
         make.width.mas_equalTo(72);
     }];
     [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
