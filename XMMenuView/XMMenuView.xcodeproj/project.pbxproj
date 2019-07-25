@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110B20E8BB76E5D207BB7D52 /* libPods-XMMenuView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E8CE922207B9B37CD87711 /* libPods-XMMenuView.a */; };
 		9BA3068422E9820100DBF1A8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3068322E9820100DBF1A8 /* AppDelegate.m */; };
 		9BA3068722E9820100DBF1A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3068622E9820100DBF1A8 /* ViewController.m */; };
 		9BA3068A22E9820100DBF1A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA3068822E9820100DBF1A8 /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C193281DF4DFCE9964AF350 /* Pods-XMMenuView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMMenuView.release.xcconfig"; path = "Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView.release.xcconfig"; sourceTree = "<group>"; };
+		65E8CE922207B9B37CD87711 /* libPods-XMMenuView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XMMenuView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA3067F22E9820100DBF1A8 /* XMMenuView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMMenuView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA3068222E9820100DBF1A8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BA3068322E9820100DBF1A8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		9BA3068E22E9820200DBF1A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BA3069022E9820200DBF1A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BA3069122E9820200DBF1A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B47890FF6B382DF3AEA7CC11 /* Pods-XMMenuView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMMenuView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				110B20E8BB76E5D207BB7D52 /* libPods-XMMenuView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				9BA3068122E9820100DBF1A8 /* XMMenuView */,
 				9BA3068022E9820100DBF1A8 /* Products */,
+				EE31F63DAA9050E62B53CA98 /* Pods */,
+				F190735FE24797123AB0639A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +78,23 @@
 			path = XMMenuView;
 			sourceTree = "<group>";
 		};
+		EE31F63DAA9050E62B53CA98 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B47890FF6B382DF3AEA7CC11 /* Pods-XMMenuView.debug.xcconfig */,
+				2C193281DF4DFCE9964AF350 /* Pods-XMMenuView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F190735FE24797123AB0639A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65E8CE922207B9B37CD87711 /* libPods-XMMenuView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -78,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BA3069522E9820300DBF1A8 /* Build configuration list for PBXNativeTarget "XMMenuView" */;
 			buildPhases = (
+				1B68FC5063AFD81E6DC396DA /* [CP] Check Pods Manifest.lock */,
 				9BA3067B22E9820100DBF1A8 /* Sources */,
 				9BA3067C22E9820100DBF1A8 /* Frameworks */,
 				9BA3067D22E9820100DBF1A8 /* Resources */,
+				C93843A4DA47423F611B8035 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +161,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B68FC5063AFD81E6DC396DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XMMenuView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C93843A4DA47423F611B8035 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView-frameworks.sh",
+				"${PODS_ROOT}/LookinServer/LookinServer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9BA3067B22E9820100DBF1A8 /* Sources */ = {
@@ -283,6 +356,7 @@
 		};
 		9BA3069622E9820300DBF1A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B47890FF6B382DF3AEA7CC11 /* Pods-XMMenuView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +374,7 @@
 		};
 		9BA3069722E9820300DBF1A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C193281DF4DFCE9964AF350 /* Pods-XMMenuView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
