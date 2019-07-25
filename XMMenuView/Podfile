@@ -10,5 +10,6 @@ target 'XMMenuView' do
 inhibit_all_warnings!
 
 pod 'LookinServer', :configurations => ['Debug']
+pod 'Masonry'
 
 end

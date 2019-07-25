@@ -30,8 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)  BOOL                          dismissOnTouchOutside;
 //设置字体大小 default = 15
 @property (nonatomic,assign)  UIFont                        *textFont;
-//设置字体颜色 default = 黑色
-@property (nonatomic,strong)  UIColor                       *textColor;
 //设置偏移距离 default = 0（与触摸点在Y轴上的偏移）
 @property (nonatomic,assign)  CGFloat                       offset;
 

@@ -15,6 +15,7 @@
 		9BA3069222E9820200DBF1A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3069122E9820200DBF1A8 /* main.m */; };
 		9BA3069A22E9836300DBF1A8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3069922E9836300DBF1A8 /* HomeViewController.m */; };
 		9BA3069E22E9875D00DBF1A8 /* XMMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3069D22E9875D00DBF1A8 /* XMMenuView.m */; };
+		9BA306A122E9A15300DBF1A8 /* XMMenuTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA306A022E9A15300DBF1A8 /* XMMenuTableHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		9BA3069922E9836300DBF1A8 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		9BA3069C22E9875D00DBF1A8 /* XMMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMMenuView.h; sourceTree = "<group>"; };
 		9BA3069D22E9875D00DBF1A8 /* XMMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMMenuView.m; sourceTree = "<group>"; };
+		9BA3069F22E9A15300DBF1A8 /* XMMenuTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMMenuTableHeaderView.h; sourceTree = "<group>"; };
+		9BA306A022E9A15300DBF1A8 /* XMMenuTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMMenuTableHeaderView.m; sourceTree = "<group>"; };
 		B47890FF6B382DF3AEA7CC11 /* Pods-XMMenuView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMMenuView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +90,8 @@
 			children = (
 				9BA3069C22E9875D00DBF1A8 /* XMMenuView.h */,
 				9BA3069D22E9875D00DBF1A8 /* XMMenuView.m */,
+				9BA3069F22E9A15300DBF1A8 /* XMMenuTableHeaderView.h */,
+				9BA306A022E9A15300DBF1A8 /* XMMenuTableHeaderView.m */,
 			);
 			path = XMMenuView;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				9BA3069222E9820200DBF1A8 /* main.m in Sources */,
 				9BA3068422E9820100DBF1A8 /* AppDelegate.m in Sources */,
 				9BA3069A22E9836300DBF1A8 /* HomeViewController.m in Sources */,
+				9BA306A122E9A15300DBF1A8 /* XMMenuTableHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

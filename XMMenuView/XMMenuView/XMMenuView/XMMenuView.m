@@ -7,6 +7,7 @@
 //
 
 #import "XMMenuView.h"
+#import <Masonry.h>
 
 #define kScreenWidth               [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight              [UIScreen mainScreen].bounds.size.height
@@ -113,41 +114,91 @@
 }
 @end
 
+#pragma mark - XMMenuCell
 @interface XMMenuCell : UITableViewCell
-@property (nonatomic,assign) BOOL         isShowSeparator;
-@property (nonatomic,strong) UIColor    * separatorColor;
+
 @end
+
+@interface XMMenuCell ()
+
+@property (nonatomic, strong) UILabel *leftLabel;
+@property (nonatomic, strong) UILabel *middleLabel;
+@property (nonatomic, strong) UILabel *rightLabel;
+
+@end
+
 @implementation XMMenuCell
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _isShowSeparator = YES;
-        _separatorColor = [UIColor lightGrayColor];
+        [self setupUI];
     }
     return self;
 }
 
-- (void)setSeparatorColor:(UIColor *)separatorColor{
-    _separatorColor = separatorColor;
-    [self setNeedsDisplay];
+#pragma mark - setupUI
+- (void)setupUI {
+    
+    [self.contentView addSubview:self.leftLabel];
+    [self.contentView addSubview:self.middleLabel];
+    [self.contentView addSubview:self.rightLabel];
+    
+    [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.centerX.equalTo(self.contentView.mas_centerX).multipliedBy(0.35);
+    }];
+    [self.middleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.contentView);
+        make.width.mas_equalTo(72);
+    }];
+    [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.centerX.equalTo(self.contentView.mas_centerX).multipliedBy(1.65);
+    }];
 }
-- (void)setIsShowSeparator:(BOOL)isShowSeparator{
-    _isShowSeparator = isShowSeparator;
-    [self setNeedsDisplay];
+
+#pragma mark - Getters and Setters
+- (UILabel *)leftLabel {
+    if (_leftLabel == nil) {
+        _leftLabel = [[UILabel alloc] init];
+        _leftLabel.text = @"第一次";
+        _leftLabel.textColor = [UIColor whiteColor];
+        _leftLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _leftLabel;
 }
-- (void)drawRect:(CGRect)rect{
-    if (!_isShowSeparator)return;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, rect.size.height - 0.5, rect.size.width, 0.5)];
-    [_separatorColor setFill];
-    [path fillWithBlendMode:kCGBlendModeNormal alpha:1.0f];
-    [path closePath];
+
+- (UILabel *)middleLabel {
+    if (_middleLabel == nil) {
+        _middleLabel = [[UILabel alloc] init];
+        _middleLabel.text = @"2019-07-07 09:09:00";
+        _middleLabel.textColor = [UIColor whiteColor];
+        _middleLabel.font = [UIFont systemFontOfSize:12];
+        _middleLabel.numberOfLines = 0;
+        _middleLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _middleLabel;
 }
+
+- (UILabel *)rightLabel {
+    if (_rightLabel == nil) {
+        _rightLabel = [[UILabel alloc] init];
+        _rightLabel.text = @"等待管理审核";
+        _rightLabel.textColor = [UIColor whiteColor];
+        _rightLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _rightLabel;
+}
+
 @end
 
 
 @interface XMMenuAction()
+
 @property (nonatomic) NSString      *title;
 @property (nonatomic) UIImage       *image;
 @property (copy, nonatomic)void (^handler)(XMMenuAction *);
+
 @end
 @implementation XMMenuAction
 
@@ -165,8 +216,10 @@
 }
 @end
 
+#import "XMMenuTableHeaderView.h"
+
 #pragma mark - XMMenuView - interface
-@interface XMMenuView()<UITableViewDelegate,UITableViewDataSource>
+@interface XMMenuView()<UITableViewDelegate, UITableViewDataSource>
 {
     CGPoint          _refPoint;
     UIView          *_refView;
@@ -235,14 +288,13 @@ static NSString *const menuCellID = @"XMMenuCell";
     
     _cornerRaius = 5.0f;
     _separatorColor = [UIColor blackColor];
-    _menuColor = [UIColor whiteColor];
+    _menuColor = [UIColor blackColor];
     _menuCellHeight = 44.0f;
     _maxDisplayCount = 5;
     _isShowShadow = YES;
     _dismissOnselected = YES;
     _dismissOnTouchOutside = YES;
     
-    _textColor = [UIColor blackColor];
     _textFont = [UIFont systemFontOfSize:15.0f];
     _offset = 0.0f;
 }
@@ -410,7 +462,7 @@ static NSString *const menuCellID = @"XMMenuCell";
     self.layer.shadowRadius = 5.0;
 }
 
-#pragma mark - <UITableViewDelegate,UITableViewDataSource>
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _actions.count;
 }
@@ -419,23 +471,30 @@ static NSString *const menuCellID = @"XMMenuCell";
     XMMenuAction *action = _actions[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = _textFont;
-    cell.textLabel.textColor = _textColor;
-    cell.textLabel.text = action.title;
-    cell.separatorColor = _separatorColor;
-    cell.imageView.image = action.image?action.image:nil;
+//    cell.textLabel.text = action.title;
     
-    if (indexPath.row == _actions.count - 1) {
-        cell.isShowSeparator = NO;
-    }
+    cell.imageView.image = action.image?action.image:nil;
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (_dismissOnselected) [self dismiss];
     XMMenuAction *action = _actions[indexPath.row];
     if (action.handler) {
         action.handler(action);
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    XMMenuTableHeaderView *headerView = [[XMMenuTableHeaderView alloc] init];
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
 }
 
 #pragma mark - Setting&&Getting
@@ -450,6 +509,7 @@ static NSString *const menuCellID = @"XMMenuCell";
         _tableView.tableFooterView = [UIView new];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[XMMenuCell class] forCellReuseIdentifier:menuCellID];
+//        _tableView.backgroundColor = [UIColor blackColor];
     }
     return _tableView;
 }
@@ -489,11 +549,7 @@ static NSString *const menuCellID = @"XMMenuCell";
     _menuColor = backgroundColor;
     self.contentView.backgroundColor = _menuColor;
 }
-- (void)setSeparatorColor:(UIColor *)separatorColor{
-    if ([_separatorColor isEqual:separatorColor]) return;
-    _separatorColor = separatorColor;
-    [self.tableView reloadData];
-}
+
 - (void)setMenuCellHeight:(CGFloat)menuCellHeight{
     if (_menuCellHeight == menuCellHeight)return;
     _menuCellHeight = menuCellHeight;
@@ -520,11 +576,7 @@ static NSString *const menuCellID = @"XMMenuCell";
     _textFont = textFont;
     [self.tableView reloadData];
 }
-- (void)setTextColor:(UIColor *)textColor{
-    if ([_textColor isEqual:textColor]) return;
-    _textColor = textColor;
-    [self.tableView reloadData];
-}
+
 - (void)setOffset:(CGFloat)offset{
     if (_offset == offset) return;
     _offset = offset;
