@@ -11,9 +11,9 @@
 
 @interface XMMenuCell ()
 
-@property (nonatomic, strong) UILabel *leftLabel;
-@property (nonatomic, strong) UILabel *middleLabel;
-@property (nonatomic, strong) UILabel *rightLabel;
+//@property (nonatomic, strong) UILabel *leftLabel;
+//@property (nonatomic, strong) UILabel *middleLabel;
+//@property (nonatomic, strong) UILabel *rightLabel;
 
 @end
 
@@ -27,6 +27,7 @@
         cell = [[XMMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -63,7 +64,7 @@
 - (UILabel *)leftLabel {
     if (_leftLabel == nil) {
         _leftLabel = [[UILabel alloc] init];
-        _leftLabel.text = @"第一次";
+        _leftLabel.text = @" ";
         _leftLabel.textColor = [UIColor whiteColor];
         _leftLabel.font = [UIFont systemFontOfSize:14];
     }
@@ -73,7 +74,7 @@
 - (UILabel *)middleLabel {
     if (_middleLabel == nil) {
         _middleLabel = [[UILabel alloc] init];
-        _middleLabel.text = @"2019-07-07 09:09:00";
+        _middleLabel.text = @" ";
         _middleLabel.textColor = [UIColor whiteColor];
         _middleLabel.font = [UIFont systemFontOfSize:12];
         _middleLabel.numberOfLines = 0;
@@ -85,7 +86,7 @@
 - (UILabel *)rightLabel {
     if (_rightLabel == nil) {
         _rightLabel = [[UILabel alloc] init];
-        _rightLabel.text = @"等待管理审核";
+        _rightLabel.text = @" ";
         _rightLabel.textColor = [UIColor whiteColor];
         _rightLabel.font = [UIFont systemFontOfSize:14];
     }

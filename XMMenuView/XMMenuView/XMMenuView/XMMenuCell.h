@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XMMenuCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *leftLabel;
+@property (nonatomic, strong) UILabel *middleLabel;
+@property (nonatomic, strong) UILabel *rightLabel;
+
 + (instancetype)menuCellWithTableView:(UITableView *)tableView;
 
 @end

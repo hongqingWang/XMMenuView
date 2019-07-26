@@ -114,29 +114,6 @@
 }
 @end
 
-@interface XMMenuAction()
-
-@property (nonatomic) NSString      *title;
-@property (nonatomic) UIImage       *image;
-@property (copy, nonatomic)void (^handler)(XMMenuAction *);
-
-@end
-@implementation XMMenuAction
-
-+ (instancetype)actionWithTitle:(NSString *)title image:(UIImage *)image handler:(void (^)(XMMenuAction *))handler{
-    XMMenuAction *action = [[XMMenuAction alloc] initWithTitle:title image:image handler:handler];
-    return action;
-}
-- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image handler:(void (^)(XMMenuAction *))handler{
-    if (self = [super init]) {
-        _title = title;
-        _image = image;
-        _handler = [handler copy];
-    }
-    return self;
-}
-@end
-
 #pragma mark - XMMenuView - interface
 #import "XMMenuTableHeaderView.h"
 #import "XMMenuCell.h"
@@ -152,27 +129,31 @@
     BOOL            _isReverse; // 是否反向
     BOOL            _needReload; //是否需要刷新
 }
-@property(nonatomic,copy) NSArray<XMMenuAction *>   *actions;
+
+@property (nonatomic, copy) NSArray *array;
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)UIView                   *contentView;
 @property(nonatomic,strong)UIView                   *bgView;
+
+//最大显示数量  default = 5
+@property (nonatomic, assign) NSInteger maxDisplayCount;
 
 @end
 
 #pragma mark - XMMenuView - implementation
 @implementation XMMenuView
 
-// 从关联视图创建（可以是UIView和UIBarButtonItem）
-+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions relyonView:(id)view {
+
++ (instancetype)menuWithArray:(NSArray *)array relyonView:(id)view {
     
     CGFloat menuWidth = [UIScreen mainScreen].bounds.size.width - 60;
-
+    
     NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
-    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:menuWidth relyonView:view];
+    XMMenuView *menu = [[XMMenuView alloc] initWithArray:array width:menuWidth relyonView:view];
     return menu;
 }
 
-- (instancetype)initWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
+- (instancetype)initWithArray:(NSArray *)array width:(CGFloat)width relyonView:(id)view{
     if (self = [super init]) {
         // 针对UIBarButtonItem做的处理
         if ([view isKindOfClass:[UIBarButtonItem class]]) {
@@ -181,7 +162,7 @@
         }else{
             _refView = view;
         }
-        _actions = [actions copy];
+        _array = [array copy];
         _menuWidth = width;
         [self defaultConfiguration];
         [self setupSubView];
@@ -221,7 +202,7 @@
 - (CGPoint)getRefPoint{
     CGRect absoluteRect = [_refView convertRect:_refView.bounds toView:kMainWindow];
     CGPoint refPoint;
-    CGFloat menuHeight = (_actions.count > _maxDisplayCount) ? _maxDisplayCount * _menuCellHeight + kArrowHeight: _actions.count * _menuCellHeight + kArrowHeight;
+    CGFloat menuHeight = (_array.count > _maxDisplayCount) ? _maxDisplayCount * _menuCellHeight + kArrowHeight : _array.count * _menuCellHeight + kArrowHeight;
     if (absoluteRect.origin.y + absoluteRect.size.height +  menuHeight > kScreenHeight - 10) {
         refPoint = CGPointMake(absoluteRect.origin.x + absoluteRect.size.width / 2, absoluteRect.origin.y);
         _isReverse = YES;
@@ -232,7 +213,7 @@
     return refPoint;
 }
 
-- (void)show{
+- (void)show {
     // 自定义设置统一在这边刷新一次
     if (_needReload) [self reloadData];
     
@@ -246,7 +227,7 @@
     }];
 }
 
-- (void)dismiss{
+- (void)dismiss {
     if (!_dismissOnTouchOutside) return;
     [UIView animateWithDuration: kAnimationTime animations:^{
         self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
@@ -276,7 +257,7 @@
     CGFloat height;
     
     width = _menuWidth;
-    height = (_actions.count > _maxDisplayCount) ? _maxDisplayCount * _menuCellHeight + kArrowHeight: _actions.count * _menuCellHeight + kArrowHeight;
+    height = (_array.count > _maxDisplayCount) ? (_maxDisplayCount + 1) * _menuCellHeight + kArrowHeight: (_array.count + 1) * _menuCellHeight + kArrowHeight;
     // 默认在中间
     _arrowPosition = 0.5 * width - 0.5 * kArrowWidth;
     
@@ -369,16 +350,16 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _actions.count;
+    return _array.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     XMMenuCell *cell = [XMMenuCell menuCellWithTableView:tableView];
-    XMMenuAction *action = _actions[indexPath.row];
-    cell.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.text = action.title;
     
-    cell.imageView.image = action.image?action.image:nil;
+    NSDictionary *dict = _array[indexPath.row];
+    cell.leftLabel.text = dict[@"count"];
+    cell.middleLabel.text = dict[@"time"];
+    cell.rightLabel.text = dict[@"status"];
     return cell;
 }
 
@@ -387,10 +368,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (_dismissOnselected) [self dismiss];
-    XMMenuAction *action = _actions[indexPath.row];
-    if (action.handler) {
-        action.handler(action);
-    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -409,7 +386,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.bounces = _actions.count > _maxDisplayCount? YES : NO;
+//        _tableView.bounces = _array.count > _maxDisplayCount? YES : NO;
         _tableView.rowHeight = _menuCellHeight;
         _tableView.tableFooterView = [UIView new];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
