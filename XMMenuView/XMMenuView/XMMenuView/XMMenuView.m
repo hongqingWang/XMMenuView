@@ -162,12 +162,24 @@
 #pragma mark - XMMenuView - implementation
 @implementation XMMenuView
 
-+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
-    NSAssert(width>0.0f, @"width要大于0");
+// 从关联视图创建（可以是UIView和UIBarButtonItem）
++ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions relyonView:(id)view {
+    
+    CGFloat menuWidth = [UIScreen mainScreen].bounds.size.width - 60;
+
     NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
-    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:width relyonView:view];
+    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:menuWidth relyonView:view];
     return menu;
 }
+
+//+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
+//
+//    CGFloat menuWidth = [UIScreen mainScreen].bounds.size.width - 60;
+//
+//    NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
+//    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:menuWidth relyonView:view];
+//    return menu;
+//}
 
 - (instancetype)initWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
     if (self = [super init]) {

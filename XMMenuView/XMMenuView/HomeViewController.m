@@ -104,7 +104,7 @@
 #pragma mark - Events
 - (void)didClickButton:(UIButton *)button {
     
-    XMMenuView *view = [XMMenuView menuWithActions:self.arr width:[UIScreen mainScreen].bounds.size.width - 60 relyonView:button];
+    XMMenuView *view = [XMMenuView menuWithActions:self.arr relyonView:button];
 //    view.maxDisplayCount = 3;
     
     [view show];
