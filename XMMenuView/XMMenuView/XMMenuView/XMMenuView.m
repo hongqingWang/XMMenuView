@@ -172,15 +172,6 @@
     return menu;
 }
 
-//+ (instancetype)menuWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
-//
-//    CGFloat menuWidth = [UIScreen mainScreen].bounds.size.width - 60;
-//
-//    NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
-//    XMMenuView *menu = [[XMMenuView alloc] initWithActions:actions width:menuWidth relyonView:view];
-//    return menu;
-//}
-
 - (instancetype)initWithActions:(NSArray<XMMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
     if (self = [super init]) {
         // 针对UIBarButtonItem做的处理
@@ -210,7 +201,6 @@
     _dismissOnselected = YES;
     _dismissOnTouchOutside = YES;
     
-    _textFont = [UIFont systemFontOfSize:15.0f];
     _offset = 0.0f;
 }
 
@@ -386,7 +376,6 @@
     XMMenuCell *cell = [XMMenuCell menuCellWithTableView:tableView];
     XMMenuAction *action = _actions[indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.font = _textFont;
 //    cell.textLabel.text = action.title;
     
     cell.imageView.image = action.image?action.image:nil;
@@ -484,11 +473,6 @@
     }else{
         [self setDefaultShadow];
     }
-}
-- (void)setTextFont:(UIFont *)textFont{
-    if ([_textFont isEqual:textFont]) return;
-    _textFont = textFont;
-    [self.tableView reloadData];
 }
 
 - (void)setOffset:(CGFloat)offset{
