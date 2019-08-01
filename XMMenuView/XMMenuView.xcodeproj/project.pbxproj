@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		110B20E8BB76E5D207BB7D52 /* libPods-XMMenuView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E8CE922207B9B37CD87711 /* libPods-XMMenuView.a */; };
+		9B7621A422F2C4E700D81E38 /* XMBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7621A322F2C4E700D81E38 /* XMBarMenuView.m */; };
+		9B7621A722F2C5AE00D81E38 /* XMBarMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7621A622F2C5AE00D81E38 /* XMBarMenuCell.m */; };
 		9BA3068422E9820100DBF1A8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA3068322E9820100DBF1A8 /* AppDelegate.m */; };
 		9BA3068A22E9820100DBF1A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA3068822E9820100DBF1A8 /* Main.storyboard */; };
 		9BA3068C22E9820200DBF1A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA3068B22E9820200DBF1A8 /* Assets.xcassets */; };
@@ -22,6 +24,10 @@
 /* Begin PBXFileReference section */
 		2C193281DF4DFCE9964AF350 /* Pods-XMMenuView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XMMenuView.release.xcconfig"; path = "Pods/Target Support Files/Pods-XMMenuView/Pods-XMMenuView.release.xcconfig"; sourceTree = "<group>"; };
 		65E8CE922207B9B37CD87711 /* libPods-XMMenuView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XMMenuView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B7621A222F2C4E700D81E38 /* XMBarMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMBarMenuView.h; sourceTree = "<group>"; };
+		9B7621A322F2C4E700D81E38 /* XMBarMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMBarMenuView.m; sourceTree = "<group>"; };
+		9B7621A522F2C5AE00D81E38 /* XMBarMenuCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMBarMenuCell.h; sourceTree = "<group>"; };
+		9B7621A622F2C5AE00D81E38 /* XMBarMenuCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMBarMenuCell.m; sourceTree = "<group>"; };
 		9BA3067F22E9820100DBF1A8 /* XMMenuView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMMenuView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA3068222E9820100DBF1A8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9BA3068322E9820100DBF1A8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -53,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B7621A122F2C31B00D81E38 /* XMBarMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				9B7621A222F2C4E700D81E38 /* XMBarMenuView.h */,
+				9B7621A322F2C4E700D81E38 /* XMBarMenuView.m */,
+				9B7621A522F2C5AE00D81E38 /* XMBarMenuCell.h */,
+				9B7621A622F2C5AE00D81E38 /* XMBarMenuCell.m */,
+			);
+			path = XMBarMenuView;
+			sourceTree = "<group>";
+		};
 		9BA3067622E9820100DBF1A8 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +95,7 @@
 				9BA3068322E9820100DBF1A8 /* AppDelegate.m */,
 				9BA3069822E9836300DBF1A8 /* HomeViewController.h */,
 				9BA3069922E9836300DBF1A8 /* HomeViewController.m */,
+				9B7621A122F2C31B00D81E38 /* XMBarMenuView */,
 				9BA3069B22E9841A00DBF1A8 /* XMMenuView */,
 				9BA3068822E9820100DBF1A8 /* Main.storyboard */,
 				9BA3068B22E9820200DBF1A8 /* Assets.xcassets */,
@@ -238,7 +256,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA3069E22E9875D00DBF1A8 /* XMMenuView.m in Sources */,
+				9B7621A722F2C5AE00D81E38 /* XMBarMenuCell.m in Sources */,
 				9BA3069222E9820200DBF1A8 /* main.m in Sources */,
+				9B7621A422F2C4E700D81E38 /* XMBarMenuView.m in Sources */,
 				9BA3068422E9820100DBF1A8 /* AppDelegate.m in Sources */,
 				9BA306A422E9A9B300DBF1A8 /* XMMenuCell.m in Sources */,
 				9BA3069A22E9836300DBF1A8 /* HomeViewController.m in Sources */,

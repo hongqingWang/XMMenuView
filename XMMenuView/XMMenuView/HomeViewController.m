@@ -8,8 +8,9 @@
 
 #import "HomeViewController.h"
 #import "XMMenuView.h"
+#import "XMBarMenuView.h"
 
-@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate, XMBarMenuViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -23,23 +24,6 @@
     
     [self setupUI];
     
-//    UIImage *image = [UIImage imageNamed:@"ic_filter_category_0"];
-//    XMMenuAction *action = [XMMenuAction actionWithTitle:@"首页" image:image handler:^(XMMenuAction *action) {
-//        NSLog(@"点击了%@",action.title);
-//    }];
-//    XMMenuAction *action1 = [XMMenuAction actionWithTitle:@"个人" image:image handler:^(XMMenuAction *action) {
-//        NSLog(@"点击了%@",action.title);
-//    }];
-//    XMMenuAction *action2 = [XMMenuAction actionWithTitle:@"最新" image:image handler:^(XMMenuAction *action) {
-//        NSLog(@"点击了%@",action.title);
-//    }];
-//    XMMenuAction *action3 = [XMMenuAction actionWithTitle:@"搜索页" image:image handler:^(XMMenuAction *action) {
-//        NSLog(@"点击了%@",action.title);
-//    }];
-//    XMMenuAction *action4 = [XMMenuAction actionWithTitle:@"新闻页" image:image handler:^(XMMenuAction *action) {
-//        NSLog(@"点击了%@",action.title);
-//    }];
-//    self.arr = @[action,action1,action2,action3,action4,action,action1,action2];
 }
 
 #pragma mark - SetupUI
@@ -48,6 +32,28 @@
     self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
+    
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RightItem" style:UIBarButtonItemStylePlain target:self action:@selector(didClickBarButtonItem:)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+}
+
+#pragma mark - didClickBarButtonItem
+- (void)didClickBarButtonItem:(UIBarButtonItem *)barButtonItem {
+    
+    NSArray *array = @[@"添加任务", @"扫一扫"];
+    
+    XMBarMenuView *barMenuView = [XMBarMenuView menuWithArray:array relyonView:barButtonItem];
+    barMenuView.delegate = self;
+    [barMenuView show];
+}
+
+#pragma mark - XMBarMenuViewDelegate
+- (void)barMenuView:(XMBarMenuView *)barMenuView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        NSLog(@"添加任务");
+    } else {
+        NSLog(@"扫一扫");
+    }
 }
 
 #pragma mark - UITableViewDataSource
